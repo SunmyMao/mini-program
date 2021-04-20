@@ -1,0 +1,33 @@
+<!--index.wxml-->
+<view class="page-body">
+  <form catchsubmit="formSubmit" catchreset="formReset">
+  <view class="page-section">
+    <view class="weui-cells__title">加数</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input  name="number1" class="weui-input" type="digit" placeholder="number1"/>
+      </view>
+    </view>
+  </view>
+  <view class="page-section">
+    <view class="weui-cells__title">被加数</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input name="number2" class="weui-input" type="digit" placeholder="number2"/>
+      </view>
+    </view>
+  </view>
+  <view class="page-section">
+    <view class="weui-cells__title">和</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input class="weui-input" type="digit" placeholder="结果" value="{{result}}"/>
+      </view>
+    </view>
+  </view>
+  <view class="btn-area">
+    <button style="margin: 30rpx 0" type="primary" formType="submit">计算</button>
+    <button style="margin: 30rpx 0" formType="reset">重置</button>
+  </view>
+</form>
+</view>
