@@ -1,33 +1,52 @@
-<!--index.wxml-->
-<view class="page-body">
-  <form catchsubmit="formSubmit" catchreset="formReset">
-  <view class="page-section">
-    <view class="weui-cells__title">加数</view>
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_input">
-        <input  name="number1" class="weui-input" type="digit" placeholder="number1"/>
-      </view>
-    </view>
-  </view>
-  <view class="page-section">
-    <view class="weui-cells__title">被加数</view>
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_input">
-        <input name="number2" class="weui-input" type="digit" placeholder="number2"/>
-      </view>
-    </view>
-  </view>
-  <view class="page-section">
-    <view class="weui-cells__title">和</view>
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_input">
-        <input class="weui-input" type="digit" placeholder="结果" value="{{result}}"/>
-      </view>
-    </view>
-  </view>
-  <view class="btn-area">
-    <button style="margin: 30rpx 0" type="primary" formType="submit">计算</button>
-    <button style="margin: 30rpx 0" formType="reset">重置</button>
-  </view>
-</form>
+<view class="page" data-weui-theme="{{theme}}">
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+ <mp-form-page>
+        <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+            <mp-cells>
+                <mp-cell ext-class="weui-cell_select weui-cell_select-after">
+                    <view slot="title" class="weui-label">机台</view>
+                    <picker bindchange="bindJiTaiChange" value="{{jiTaiIndex}}" range="{{jiTaiArray}}">
+                        <view class="weui-select">{{jiTaiArray[jiTaiIndex]}}</view>
+                    </picker>
+                </mp-cell>
+                <mp-cell prop="zhuDingDanZhong" title="铸锭单重" ext-class="">
+                    <input data-field="zhuDingDanZhong" disabled="true" class="weui-input" placeholder="只读项" value="{{zhuDingDanZhong}}"/>
+                </mp-cell>
+                <mp-cell prop="dunCuDanZhong" title="墩粗单重" ext-class="">
+                    <input data-field="dunCuDanZhong" disabled="true" class="weui-input" placeholder="只读项"value="{{dunCuDanZhong}}"/>
+                </mp-cell>
+                <mp-cell prop="qq" title="压余重量" ext-class="">
+                    <input bindinput="formInputChange" type="digit" data-field="qq" class="weui-input" placeholder="请输入压余重量"/>
+                </mp-cell>
+                <mp-cell prop="yongDingChangDu" title="用锭长度" ext-class="">
+                    <input data-field="qq" type="number" class="weui-input" placeholder="请输入用锭长度"/>
+                </mp-cell>
+                <mp-cell prop="qq" title="辅助时间" ext-class="">
+                    <input type="digit" data-field="qq" class="weui-input" placeholder="请输入辅助时间"/>
+                </mp-cell>
+                <mp-cell prop="qq" title="挤压速度" ext-class="">
+                    <input type="digit"  data-field="qq" class="weui-input" placeholder="请输入挤压速度"/>
+                </mp-cell>
+                <mp-cell prop="qq" title="生产时间(11小时)" ext-class="">
+                    <input type="number" data-field="qq" class="weui-input" placeholder="请输入生产时间"/>
+                </mp-cell>
+                <mp-cell prop="qq" title="单重" ext-class="">
+                    <input type="digit" data-field="qq" class="weui-input" placeholder="请输入单重"/>
+                </mp-cell>
+                <mp-cell prop="qq" title="定尺" ext-class="">
+                    <input type="digit"  data-field="qq" class="weui-input" placeholder="请输入定尺"/>
+                </mp-cell>
+                <mp-cell prop="qq" title="单根锭支数" ext-class="">
+                    <input type="number" data-field="qq" class="weui-input" placeholder="请输入单根锭支数"/>
+                </mp-cell>
+
+                <mp-cell has-header="{{false}}" has-footer="{{false}}" title="" ext-class="">
+                    <textarea class="weui-textarea" placeholder="计算结果" style="height: 3.3em" />
+                </mp-cell>
+            </mp-cells>
+        </mp-form>
+        <view slot="button">
+            <button class="weui-btn" type="primary" bindtap="submitForm">计算</button>
+        </view>
+    </mp-form-page>
 </view>

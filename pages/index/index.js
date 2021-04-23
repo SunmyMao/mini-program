@@ -1,73 +1,88 @@
 // index.js
 // 获取应用实例
+
+import CustomPage from '../../utils/CustomPage'
+
 const app = getApp()
 
-Page({
+CustomPage({    
   data: {
-    result: 0,
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName') // 如需尝试获取用户信息可改为false
-  },
-  formSubmit: function (e) {
-    console.log(this.data.result)
-    this.setData({
-      result: parseFloat(e.detail.value["number1"]) + parseFloat(e.detail.value["number2"])
-    })
-  },
-  // 事件处理函数
-  bindViewTap() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad() {
-    if (wx.getUserProfile) {
-      this.setData({
-        canIUseGetUserProfile: true
-      })
-    }
-  },
-  getUserProfile(e) {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    })
-  },
-  getUserInfo(e) {
-    // 不推荐使用getUserInfo获取用户信息，预计自2021年4月13日起，getUserInfo将不再弹出弹窗，并直接返回匿名的用户个人信息
-    console.log(e)
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
-  bindReplaceInput: function (e) {
-    var value = e.detail.value
-    var pos = e.detail.cursor
-    var left
-    if (pos !== -1) {
-      // 光标在中间
-      left = e.detail.value.slice(0, pos)
-      // 计算光标的位置
-      pos = left.replace(/11/g, '2').length
-    }
+      showTopTips: false,
 
-    // 直接返回对象，可以对输入进行过滤处理，同时可以控制光标的位置
-    return {
-      value: value.replace(/11/g, '2'),
-      cursor: pos
-    }
-    // 或者直接返回字符串,光标在最后边
-    // return value.replace(/11/g,'2'),
+      jiTaiArray: [660, 1100, 1400, 1800, 4000],
+      jiTaiIndex: 0,
+      zhuDingDanZhongArray :[0.01716,0.03418,0.04897,0.06715,0.20368],
+      dunCuDanZhongArray :[0.01913, 0.03806, 0.05426, 0.07412, 0.21976],
+      zhuDingDanZhong: 0.01716,
+      dunCuDanZhong:0.01913,
+
+      formData: {
+      },
+      rules: [{
+          name: 'radio',
+          rules: {required: false, message: '单选列表是必选项'},
+      }, {
+          name: 'checkbox',
+          rules: {required: true, message: '多选列表是必选项'},
+      }, {
+          name: 'name',
+          rules: {required: true, message: '请输入姓名'},
+      }, {
+          name: 'qq',
+          rules: {required: true, message: 'qq必填'},
+      }, {
+          name: 'mobile',
+          rules: [{required: true, message: 'mobile必填'}, {mobile: true, message: 'mobile格式不对'}],
+      }]
   },
-})
+  bindDateChange: function (e) {
+      this.setData({
+          date: e.detail.value,
+          [`formData.date`]: e.detail.value
+      })
+  },
+  formInputChange(e) {
+      const {field} = e.currentTarget.dataset
+      this.setData({
+          [`formData.${field}`]: e.detail.value
+      })
+  },
+  bindJiTaiChange: function(e) {
+      console.log('picker country 发生选择改变，携带值为', e.detail.value);
+
+      this.setData({
+          jiTaiIndex: e.detail.value,
+          zhuDingDanZhong: this.data.zhuDingDanZhongArray[e.detail.value],
+          dunCuDanZhong: this.data.dunCuDanZhongArray[e.detail.value]
+      })
+  },
+  bindAccountChange: function(e) {
+      console.log('picker account 发生选择改变，携带值为', e.detail.value);
+
+      this.setData({
+          accountIndex: e.detail.value
+      })
+  },
+  bindAgreeChange: function (e) {
+      this.setData({
+          isAgree: !!e.detail.value.length
+      });
+  },
+  submitForm() {
+      this.selectComponent('#form').validate((valid, errors) => {
+          console.log('valid', valid, errors)
+          if (!valid) {
+              const firstError = Object.keys(errors)
+              if (firstError.length) {
+                  this.setData({
+                      error: errors[firstError[0]].message
+                  })
+              }
+          } else {
+              wx.showToast({
+                  title: '校验通过'
+              })
+          }
+      })
+  }
+});
