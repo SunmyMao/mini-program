@@ -1,9 +1,9 @@
-<view class="page" data-weui-theme="{{theme}}">
+<view class="page">
     <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
     <form bindsubmit="formSubmit">
-        <mp-form-page>
-            <mp-form id="form" rules="{{rules}}" models="{{formData}}">
-                <mp-cells>
+        <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+            <view style="margin-top: -8px;padding-bottom:16px; background-color: var(--weui-BG-2);">
+                <mp-cells>       
                     <mp-cell ext-class="weui-cell_select weui-cell_select-after">
                         <view slot="title" class="weui-label">机台</view>
                         <picker bindchange="bindJiTaiChange" value="{{jiTaiIndex}}" range="{{jiTaiArray}}">
@@ -51,14 +51,14 @@
                             data-field="danGenDingCount" class="weui-input" placeholder="请输入单根锭支数" />
                     </mp-cell>
 
-                    <mp-cell title="" ext-class="">
+                    <mp-cell>
                         <textarea class="weui-textarea" placeholder="计算结果" value="{{result}}" style="height: 5.3em" />
-                        </mp-cell>
-            </mp-cells>
+                    </mp-cell>
+                </mp-cells>
+            </view>
         </mp-form>
-        <view slot="button">
+        <view slot="button" style="padding-bottom:50px;">
             <button class="weui-btn" type="primary" form-type="submit">计算</button>
         </view>
-        </mp-form-page>
     </form>
 </view>

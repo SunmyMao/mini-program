@@ -608,8 +608,8 @@
    color: var(--weui-FG-1)
  }
  
- .weui-cells {
-   margin-top: 8px;
+ .weui-cells{
+   padding-top: -8px;
    background-color: var(--weui-BG-2);
    line-height: 1.41176471;
    font-size: 17px;
@@ -1847,8 +1847,16 @@
    -webkit-box-flex: 1;
    -webkit-flex: 1;
    flex: 1;
-   margin: 0px;
+   margin: 48px, 0;
  }
+
+ .weui-cells {
+  background-color: var(--weui-BG-2);
+  line-height: 1.41176471;
+  font-size: 17px;
+  overflow: hidden;
+  position: relative;
+}
  
  .weui-form__tips-area {
    overflow: hidden

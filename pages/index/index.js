@@ -109,7 +109,7 @@ CustomPage({
             // result += "墩粗后长度: " + String(dunCuHouLength.toFixed(2)) + "\n"
             result += "单支时间: " + String(danZhiHours.toFixed(2)) + "\n"
             result += "单班挤出锭数: " + String(danBanJiChuDingShu.toFixed(2)) + "\n"
-            result += "成品率: " + String(chengPinRate.toFixed(4) * 100) + "\n"
+            result += "成品率: " + String(chengPinRate.toFixed(4) * 100) + "%\n"
             result += "单班产出: " + String(danBanChanChu.toFixed(2))
 
             this.setData({
