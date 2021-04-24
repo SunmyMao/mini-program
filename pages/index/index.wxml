@@ -1,8 +1,8 @@
-<view class="page">
+<view class="page" style="width:100%;background-color: var(--weui-BG-2);">
     <mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
     <form bindsubmit="formSubmit">
         <mp-form id="form" rules="{{rules}}" models="{{formData}}">
-            <view style="margin-top: -8px;padding-bottom:16px; background-color: var(--weui-BG-2);">
+            <view style="margin-top: -8px;padding-bottom:16px;padding-left:5%;padding-right:5%; background-color: var(--weui-BG-2);">
                 <mp-cells>       
                     <mp-cell ext-class="weui-cell_select weui-cell_select-after">
                         <view slot="title" class="weui-label">机台</view>
@@ -57,7 +57,7 @@
                 </mp-cells>
             </view>
         </mp-form>
-        <view slot="button" style="padding-bottom:50px;">
+        <view slot="button" style="padding-bottom:20px;background-color: var(--weui-BG-2);">
             <button class="weui-btn" type="primary" form-type="submit">计算</button>
         </view>
     </form>
